@@ -1,0 +1,28 @@
+# Wireshark Display Filters for SOC Operations
+
+## Basic Protocol Filtering
+- icmp          : Show all ICMP traffic (Echo requests, replies, etc.)
+- tcp           : Show all TCP traffic
+- dns           : Show all DNS queries and responses
+- http          : Show all unencrypted HTTP traffic
+
+## Connectivity & Handshake
+- tcp.flags.syn == 1 && tcp.flags.ack == 0 : Identify initial SYN packets (potential port scanning)
+- tcp.flags.syn == 1 && tcp.flags.ack == 1 : Identify SYN-ACK responses
+- tcp.flags.reset == 1                    : Identify connection resets (potential closed ports)
+
+## HTTP Analysis
+- http.request.method == "GET"  : Show only HTTP GET requests
+- http.request.method == "POST" : Show only HTTP POST requests (potential data exfiltration)
+- http.user_agent contains "nmap" : Detect Nmap scanning activity
+- http.response.code == 404     : Show "Not Found" errors (potential directory brute forcing)
+
+## DNS Analysis
+- dns.flags.response == 0       : Show only DNS queries
+- dns.qry.name.len > 20         : Detect unusually long subdomains (potential DNS tunneling)
+- dns.resp.type == 16           : Show DNS TXT records (often abused for C2)
+
+## Advanced Triage
+- ip.addr == [Target_IP]        : Filter traffic involving a specific IP address
+- tcp.port == 80 || tcp.port == 443 : Filter for web traffic
+- eth.addr == [MAC_Address]     : Filter by hardware address
