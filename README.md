@@ -237,7 +237,7 @@ wireshark-soc-lab/
 
 ## 👤 Author
 
-**Hari**  
+**Harish Goud**  
 Cybersecurity Aspirant — SOC Operations | Incident Response | Threat Intelligence
 
 [![GitHub](https://img.shields.io/badge/GitHub-harishgoud1410--cpu-181717?style=flat&logo=github)](https://github.com/harishgoud1410-cpu)
